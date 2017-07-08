@@ -60,6 +60,8 @@ declare namespace FlvJs {
 
         statisticsInfoReportInterval?: number,
 
+        fixAudioTimestampGap?: boolean,
+
         accurateSeek?: boolean,
         seekType?: string,  // [range, param, custom]
         seekParamStart?: string,
@@ -93,7 +95,7 @@ declare namespace FlvJs {
         detachMediaElement(): void;
         load(): void;
         unload(): void;
-        play(): void;
+        play(): Promise<void>;
         pause(): void;
         type: string;
         buffered: TimeRanges;
@@ -112,16 +114,18 @@ declare namespace FlvJs {
     }
 
     interface LoggingControl {
-        forceGlobalTag: boolean,
-        globalTag: string,
-        enableAll: boolean,
-        enableDebug: boolean,
-        enableVerbose: boolean,
-        enableInfo: boolean,
-        enableWarn: boolean,
-        enableError: boolean,
-        getConfig: Object,
-        applyConfig: Object,
+        forceGlobalTag: boolean;
+        globalTag: string;
+        enableAll: boolean;
+        enableDebug: boolean;
+        enableVerbose: boolean;
+        enableInfo: boolean;
+        enableWarn: boolean;
+        enableError: boolean;
+        getConfig(): Object;
+        applyConfig(config: Object): void;
+        addLogListener(listener: Function): void;
+        removeLogListener(listener: Function): void;
     }
 
     interface Events {
